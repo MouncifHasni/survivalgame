@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (playerObject != null)
         {
