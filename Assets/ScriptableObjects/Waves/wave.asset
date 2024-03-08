@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fba4f237abcb54296d1e6ed3d216d6, type: 3}
   m_Name: wave
   m_EditorClassIdentifier: 
-  enemies: []
-  spawnInterval: 0
-  duration: 0
+  enemies:
+  - {fileID: 3954212689330545923, guid: ec9454e7f0c37414eab62d3f427047e3, type: 3}
+  - {fileID: 3954212689330545923, guid: ec9454e7f0c37414eab62d3f427047e3, type: 3}
+  spawnInterval: 2
+  duration: 10
