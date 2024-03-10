@@ -24,6 +24,9 @@ public class JMove : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
+        // Rotate the player towards the closest enemy
+        RotateTowardsClosestEnemy();
+        /*
         // Rotate the player based on joystick input
         if (rotationJoystick.Direction != Vector2.zero)
         {
@@ -32,6 +35,37 @@ public class JMove : MonoBehaviour
 
             // Apply rotation to the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }*/
+    }
+
+    void RotateTowardsClosestEnemy()
+{
+    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+    if (enemies.Length > 0)
+    {
+        Transform closestEnemy = null;
+        float closestDistance = Mathf.Infinity;
+        Vector3 playerPosition = transform.position;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(playerPosition, enemy.transform.position);
+            if (distanceToEnemy < closestDistance)
+            {
+                closestDistance = distanceToEnemy;
+                closestEnemy = enemy.transform;
+            }
+        }
+
+        // If closest enemy is found, rotate the player towards it
+        if (closestEnemy != null)
+        {
+            Vector3 directionToEnemy = closestEnemy.position - playerPosition;
+            float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
+}
+
 }

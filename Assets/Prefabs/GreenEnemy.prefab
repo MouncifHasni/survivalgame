@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1224676188540409593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6807437, y: -0.4564185, z: 0.018992387}
+  m_LocalPosition: {x: -0.6807437, y: -0.4564185, z: 0.01899239}
   m_LocalScale: {x: 1, y: 0.6369, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,9 +180,10 @@ GameObject:
   - component: {fileID: 8726647588579982883}
   - component: {fileID: 5499233853556268631}
   - component: {fileID: 1838480328679364651}
+  - component: {fileID: 6180331341458397764}
   m_Layer: 0
   m_Name: GreenEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,8 +240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  health: 0
+  health: 10
   speed: 3
+  spriteHead: {fileID: 8038090888784235224}
 --- !u!50 &1838480328679364651
 Rigidbody2D:
   serializedVersion: 4
@@ -268,6 +270,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &6180331341458397764
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954212689330545923}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.0566292, y: 0.43174148}
+  m_Size: {x: 1.1135292, y: 2.3178587}
+  m_Direction: 0
 --- !u!1 &6570371088169170211
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 6570371088169170211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2332559, y: -0.4864185, z: 0.018992387}
+  m_LocalPosition: {x: -1.2332559, y: -0.4864185, z: 0.01899239}
   m_LocalScale: {x: 1, y: 0.5966, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
