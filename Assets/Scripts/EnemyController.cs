@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     
    // Speed at which the enemy moves towards the player
     private Transform playerTransform;
+    public SpriteRenderer spriteHead;
     private Rigidbody2D rb;
 
 
@@ -38,17 +39,24 @@ public class EnemyController : MonoBehaviour
         if (playerObject != null)
         {
             // Move the enemy towards the player
-            MoveTowardsPlayer(playerObject.transform);
+            MoveTowardsPlayer(playerTransform);
+
+            
         }
     }
+
 
     void MoveTowardsPlayer(Transform playerTransform)
     {
         // Calculate direction towards the player
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
+        //Look at Player
+        // Flip the sprite horizontally if the player is on the right side
+        spriteHead.flipX = direction.x > 0;
+
         // Move the enemy towards the player
-        rb.MovePosition(rb.position + direction * speed * Time.deltaTime);
+        rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         
     }
 

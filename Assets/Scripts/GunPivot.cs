@@ -9,9 +9,8 @@ public class GunPivot : MonoBehaviour
     public Transform firePoint; // The point from where the bullet will be spawned
     public float fireRate = 0.5f; // The rate of fire in bullets per second
     public float bulletSpeed = 10f; // The speed of the bullets
-    public float bulletLifeSpan = 5f; // The lifespan of the bullets in seconds
-
     private float nextFireTime; // The time when the next bullet can be fired
+    public int damage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +39,7 @@ public class GunPivot : MonoBehaviour
 
         // Instantiate a new bullet object at the fire point position and rotation
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * rotation);
+        bullet.GetComponent<Bullet>().Initialize(damage);
 
         // Get the Rigidbody2D component of the bullet
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -48,9 +48,6 @@ public class GunPivot : MonoBehaviour
             // Add velocity to the bullet in the calculated direction
             rb.velocity = direction * bulletSpeed;
         }
-
-        // Destroy the bullet after a certain lifespan
-        Destroy(bullet, bulletLifeSpan);
     }
 }
 
