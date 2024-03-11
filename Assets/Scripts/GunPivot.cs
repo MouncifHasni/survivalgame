@@ -10,7 +10,10 @@ public class GunPivot : MonoBehaviour
     public float fireRate = 0.5f; // The rate of fire in bullets per second
     public float bulletSpeed = 10f; // The speed of the bullets
     private float nextFireTime; // The time when the next bullet can be fired
+    public float bulletLifeSpan = 4f;
     public int damage = 10;
+    public float range = 5f;
+    private bool canShoot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +24,50 @@ public class GunPivot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RotateTowardsClosestEnemy();
         // Check if it's time to fire a bullet
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && canShoot)
         {
             Shoot(); // Call the Shoot method
             nextFireTime = Time.time + 1 / fireRate; // Update the next fire time
+        }
+    }
+
+    void RotateTowardsClosestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length > 0)
+        {
+            Transform closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
+            Vector3 playerPosition = transform.position;
+
+            foreach (GameObject enemy in enemies)
+            {
+                float distanceToEnemy = Vector3.Distance(playerPosition, enemy.transform.position);
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = enemy.transform;
+                }
+            }
+            if(closestEnemy!=null && closestDistance < range){
+                 canShoot = true;
+
+                 // If closest enemy is found, rotate the player towards it
+                Vector3 directionToEnemy = closestEnemy.position - playerPosition;
+                float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                
+            }else{
+                 canShoot = false;
+            }
+
+            
+        }else{
+            canShoot = false;
         }
     }
 
@@ -48,6 +90,9 @@ public class GunPivot : MonoBehaviour
             // Add velocity to the bullet in the calculated direction
             rb.velocity = direction * bulletSpeed;
         }
+
+        // Destroy the bullet after a certain lifespan
+        Destroy(bullet, bulletLifeSpan);
     }
 }
 
