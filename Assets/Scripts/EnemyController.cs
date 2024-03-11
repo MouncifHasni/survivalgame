@@ -73,4 +73,15 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the bullet collides with an enemy
+        if (other.CompareTag("Player"))
+        {
+            // Call a method on the Player script to apply damage
+            playerObject.GetComponent<JMove>().TakeDamage(damage);
+
+        }
+    }
 }   
