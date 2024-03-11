@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour
         // Check if the bullet collides with an enemy
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("HIT");
             // Call a method on the enemy script to apply damage
             other.GetComponent<EnemyController>().TakeDamage(damage);
 
